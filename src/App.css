@@ -1,3 +1,7 @@
+:root {
+  --game-base-bg: #f3f3ed;
+}
+
 .container {
   height: 100%;
   text-align: center;
@@ -11,14 +15,30 @@
   float: left;
 }
 
-.pic-game {
-  width: 300px;
-  height: 300px;
-  background: teal;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.game-box {
+  width: 330px;
+  height: 330px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--game-base-bg);
+  background: var(--game-base-bg);
+}
+
+.game-box > .game-box-item {
+  width: 108px;
+  height: 108px;
+  margin: 1px;
+  cursor: pointer;
+}
+
+.game-box > .game-box-item-text {
+  line-height: 108px;
+  background: #fff;
+}
+
+.game-box > .game-box-item > img {
+  width: 100%;
+  height: 100%;
 }
 
 /* timeline style on page right side */
