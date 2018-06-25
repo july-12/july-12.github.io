@@ -22,12 +22,25 @@ class AvatarGame extends React.Component {
       picList: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     }
   }
+  componentDidMount() {
+    this.resetState();
+  }
+  resetState = () => {
+    let { picList } = this.state;
+    let blankPic = Math.floor(Math.random() * 8) + 1
+    picList = _.shuffle(picList)
+    this.setState({ blankPic, picList })
+  }
   canMove = (index) => {
     let { blankPic } = this.state
-    let [top, right, bottom, left] = [blankPic - 3, blankPic + 1, blankPic + 3, blankPic - 1]
-    let crossCornor = [top, right, bottom, left]
+    let crossCornor = [
+      { direct: 'top', idx: blankPic - 3 },
+      { direct: 'right', idx: blankPic + 1 },
+      { direct: 'bottom', idx: blankPic + 3 },
+      { direct: 'left', idx: blankPic - 1 }
+    ]
 
-    return _.includes(crossCornor, index)
+    return _.find(crossCornor, cornor => cornor.idx === index) || {}
   }
   exchangePos = (index) => {
     let { blankPic, picList } = this.state;
@@ -38,7 +51,11 @@ class AvatarGame extends React.Component {
     this.setState({ blankPic, picList })
   }
   handleCardMove = (index) => {
-    return this.canMove(index) && this.exchangePos(index)
+    return new Promise(resolve => {
+      let result = this.canMove(index)
+      console.log(result);
+      resolve({ direct: result.direct, callBack: () => this.exchangePos(index) })
+    })
   }
   checkShowImg = (index) => {
     let { blankPic, picList } = this.state;
@@ -60,6 +77,9 @@ class AvatarGame extends React.Component {
               />
             ))
           }
+          <div className="btn-group">
+            <button style={{marginTop: 20}} className="btn btn-reset" onClick={this.resetState}> reset </button>
+          </div>
         </div>
       </div>
     );
