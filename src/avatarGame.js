@@ -53,7 +53,6 @@ class AvatarGame extends React.Component {
   handleCardMove = (index) => {
     return new Promise(resolve => {
       let result = this.canMove(index)
-      console.log(result);
       resolve({ direct: result.direct, callBack: () => this.exchangePos(index) })
     })
   }

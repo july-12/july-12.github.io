@@ -1,5 +1,5 @@
 :root {
-  --game-base-bg: #f3f3ed;
+  --game-base-bg: #ffffff;
 }
 
 .container {
@@ -70,6 +70,7 @@
   height: 40px;
   border-radius: 30px;
   cursor: pointer;
+  outline: none;
 }
 
 button:focus,  button:active{
